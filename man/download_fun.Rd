@@ -2,9 +2,9 @@
 % Please edit documentation in R/download_function.R
 \name{download_fun}
 \alias{download_fun}
-\title{download_fun:}
+\title{download_fun}
 \usage{
-download_fun(r_width, r_height, r_distance, filepath = getwd())
+download_fun(r_width, r_height, r_distance, filepath = paste0(getwd(), "/"))
 }
 \arguments{
 \item{r_width}{Enter width of a vineyard or orchard row in m in fully developed vegetation}
@@ -13,14 +13,14 @@ download_fun(r_width, r_height, r_distance, filepath = getwd())
 
 \item{r_distance}{Enter distance between vineyard or orchard rows in m in fully developed vegetation}
 
-\item{filepath}{Enter path where downloaded files should be stored. Defaults to working directory}
+\item{filepath}{Enter path where downloaded files should be stored. Defaults to working directory. Trailing / required.}
 }
 \value{
 A list with all different vegetation state files for the associated geometry
 }
 \description{
 allows to download radiation partitioning for closest vineyard or orchard geometry from database for 16 growth states during a vegetation period
-These data can then be translated to a given location and given time period using \link{another function}
+These data can then be translated to a given location and given time period using \link{processing_function}
 }
 \details{
 Radiation Partitioning was modelled for row distances between 1 and 3.5 m, row heights between 1 and 3.5 m and row widths between 0.35 and 0.55 m.

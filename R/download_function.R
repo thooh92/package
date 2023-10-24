@@ -1,7 +1,7 @@
 #' download_fun
 #'
 #' allows to download radiation partitioning for closest vineyard or orchard geometry from database for 16 growth states during a vegetation period
-#' These data can then be translated to a given location and given time period using [another function]
+#' These data can then be translated to a given location and given time period using [processing_function]
 #'
 #' Radiation Partitioning was modelled for row distances between 1 and 3.5 m, row heights between 1 and 3.5 m and row widths between 0.35 and 0.55 m.
 #' If other geometries are given to the function, the closest geometry is downloaded. If these geometries are far off the closest modelled geometry a
