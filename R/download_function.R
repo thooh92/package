@@ -1,5 +1,4 @@
-
-#' download_fun:
+#' download_fun
 #'
 #' allows to download radiation partitioning for closest vineyard or orchard geometry from database for 16 growth states during a vegetation period
 #' These data can then be translated to a given location and given time period using [another function]
@@ -11,7 +10,7 @@
 #' @param r_width Enter width of a vineyard or orchard row in m in fully developed vegetation
 #' @param r_height Enter height of a vineyard or orchard row in m in fully developed vegetation
 #' @param r_distance Enter distance between vineyard or orchard rows in m in fully developed vegetation
-#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory
+#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory. Trailing / required.
 #'
 #' @return A list with all different vegetation state files for the associated geometry
 #' @export
@@ -19,7 +18,7 @@
 #' @examples
 #'
 
-download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
+download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(),"/")){
   library(devtools)
   library(minio.s3)
 
@@ -63,7 +62,7 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
   for(i in 1:16){
       save_object(bucket = 'met-ohnemus-miro',
               object = paste0("radiation_model/results_monte/",monte_list[i],".rdata"),
-              file = paste0(filepath,"/",monte_list[i],".rdata"),
+              file = paste0(filepath,monte_list[i],".rdata"),
               use_https = T)
   }
 }
