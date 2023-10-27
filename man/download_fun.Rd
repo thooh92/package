@@ -27,3 +27,7 @@ Radiation Partitioning was modelled for row distances between 1 and 3.5 m, row h
 If other geometries are given to the function, the closest geometry is downloaded. If these geometries are far off the closest modelled geometry a
 a warning is created.
 }
+\examples{
+download_fun(r_width = 0.4, r_height = 1.1, r_distance = 0.8, filepath = "your/path/or/wd")
+
+}

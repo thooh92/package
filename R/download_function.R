@@ -15,7 +15,7 @@
 #' @return A list with all different vegetation state files for the associated geometry
 #' @export
 #'
-#' @examples
+#' @examples download_fun(r_width = 0.4, r_height = 1.1, r_distance = 0.8, filepath = "your/path/or/wd")
 #'
 
 download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(),"/")){
@@ -54,8 +54,8 @@ download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(
 
 
   # Download from minio
-  Sys.setenv("AWS_ACCESS_KEY_ID" = 'newtest', # enter your credentials
-             "AWS_SECRET_ACCESS_KEY" = 'mFvTQdedNNHdP3PucRgTMf1HIm1QWfTGcTzOQ0a1', # enter your credentials
+  Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC', # don't change!
+             "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh', # don't change!
              "AWS_DEFAULT_REGION" = 'test',
              "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
