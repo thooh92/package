@@ -10,7 +10,7 @@
 #' @param r_width Enter width of a vineyard or orchard row in m in fully developed vegetation
 #' @param r_height Enter height of a vineyard or orchard row in m in fully developed vegetation
 #' @param r_distance Enter distance between vineyard or orchard rows in m in fully developed vegetation
-#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory. Trailing / required.
+#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory. If own path is chosen, trailing "/" required.
 #'
 #' @return A list with all different vegetation state files for the associated geometry
 #' @export
@@ -53,11 +53,13 @@ download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(
   monte_list    <- paste0("D",distance_a,"_W",width_a,"_H",height_a,suffices)
 
 
-  # Download from minio
-  Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC', # don't change!
-             "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh', # don't change!
+  # Download from minio - don't touch following information
+  Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC',
+             "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh',
              "AWS_DEFAULT_REGION" = 'test',
              "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
+
+  print("Downloading approximately 4,000 kb")
 
   for(i in 1:16){
       save_object(bucket = 'met-ohnemus-miro',
