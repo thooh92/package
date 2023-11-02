@@ -64,7 +64,8 @@ download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(
              "AWS_DEFAULT_REGION" = 'test',
              "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
-  print("Downloading approximately 4,000 kb")
+  warning("Downloading approximately 4,000 kb")
+
 
   for(i in 1:16){
       save_object(bucket = 'met-ohnemus-miro',
@@ -72,4 +73,8 @@ download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(
               file = paste0(filepath,monte_list[i],".rdata"),
               use_https = T)
   }
+
+  warning(paste("The following geometry in fully developed vegetation was downloaded: "),
+        "r_width = ",width_a,"| r_height = ", height_a, "| r_distance = ", distance_a)
 }
+
