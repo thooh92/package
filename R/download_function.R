@@ -10,7 +10,7 @@
 #' @param r_width Enter width of a vineyard or orchard row in m in fully developed vegetation
 #' @param r_height Enter height of a vineyard or orchard row in m in fully developed vegetation
 #' @param r_distance Enter distance between vineyard or orchard rows in m in fully developed vegetation
-#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory. If own path is chosen, trailing "/" required.
+#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory.
 #'
 #' @return A list with all different vegetation state files for the associated geometry
 #' @export
@@ -18,7 +18,7 @@
 #' @examples download_fun(r_width = 0.4, r_height = 1.1, r_distance = 0.8, filepath = "your/path/or/wd")
 #'
 
-download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(),"/")){
+download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
   if(require("devtools") == F){
     install.packages("devtools")
   }
@@ -26,6 +26,7 @@ download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(
   if(require("minio.s3") == F){
     install_github("thooh92/minio.s3")
   }
+  require("minio.s3")
 
   # Define available geometries
   widths    <- c(0.35, 0.45, 0.55)
@@ -65,6 +66,10 @@ download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(
              "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
   warning("Downloading approximately 4,000 kb")
+
+  if(substr(filepath, nchar(filepath), nchar(filepath)) != "/"){
+    filepath = paste0(filepath, "/")
+  }
 
 
   for(i in 1:16){
