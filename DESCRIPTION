@@ -1,10 +1,11 @@
 Package: package
-Title: What the Package Does (One Line, Title Case)
+Title: Radiation Model for Evapotranspiration in Vineyards and Apple Orchards
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Thomas", "Ohnemus", , "thomas.ohnemus@ufz.de", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1391-7673"))
+Description: Model partitions radiation in apple orchards and vineyards. It can be used to estimate and predict
+                evapotranspiration based on climate data.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
