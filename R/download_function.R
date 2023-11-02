@@ -22,11 +22,12 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
   if(require("devtools") == F){
     install.packages("devtools")
   }
+  library("devtools")
 
   if(require("minio.s3") == F){
-    install_github("thooh92/minio.s3")
+    install_github("thooh92/minio.s3", dependencies = T)
   }
-  require("minio.s3")
+  library("minio.s3")
 
   # Define available geometries
   widths    <- c(0.35, 0.45, 0.55)

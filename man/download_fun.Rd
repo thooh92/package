@@ -4,7 +4,7 @@
 \alias{download_fun}
 \title{download_fun}
 \usage{
-download_fun(r_width, r_height, r_distance, filepath = paste0(getwd(), "/"))
+download_fun(r_width, r_height, r_distance, filepath = getwd())
 }
 \arguments{
 \item{r_width}{Enter width of a vineyard or orchard row in m in fully developed vegetation}
@@ -13,7 +13,7 @@ download_fun(r_width, r_height, r_distance, filepath = paste0(getwd(), "/"))
 
 \item{r_distance}{Enter distance between vineyard or orchard rows in m in fully developed vegetation}
 
-\item{filepath}{Enter path where downloaded files should be stored. Defaults to working directory. If own path is chosen, trailing "/" required.}
+\item{filepath}{Enter path where downloaded files should be stored. Defaults to working directory.}
 }
 \value{
 A list with all different vegetation state files for the associated geometry
