@@ -61,16 +61,11 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
 
 
   # Download from minio - don't touch following information
-#  Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC',
- #            "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh',
-#             "AWS_DEFAULT_REGION" = 'test',
- #            "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
+  Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC',
+             "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh',
+             "AWS_DEFAULT_REGION" = 'test',
+             "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
-
-  Sys.setenv("AWS_ACCESS_KEY_ID" = '7WhYRNs8FAecuimNYdaU',
-              "AWS_SECRET_ACCESS_KEY" = '71s3bOgE0Hu99GvPYvBKHcJ9d74jO1GTEwTmBKl0',
-               "AWS_DEFAULT_REGION" = 'test',
-              "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
   warning("Downloading approximately 4,000 kb", call. = F)
 
