@@ -19,8 +19,13 @@
 #'
 
 download_fun <- function(r_width, r_height, r_distance, filepath = paste0(getwd(),"/")){
-  library(devtools)
-  library(minio.s3)
+  if(require("devtools") == F){
+    install.packages("devtools")
+  }
+
+  if(require("minio.s3") == F){
+    install_github("thooh92/minio.s3")
+  }
 
   # Define available geometries
   widths    <- c(0.35, 0.45, 0.55)
