@@ -66,7 +66,7 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
              "AWS_DEFAULT_REGION" = 'test',
              "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
-  warning("Downloading approximately 4,000 kb")
+  warning("Downloading approximately 4,000 kb", call. = F)
 
   if(substr(filepath, nchar(filepath), nchar(filepath)) != "/"){
     filepath = paste0(filepath, "/")
@@ -81,6 +81,6 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
   }
 
   warning(paste("The following geometry in fully developed vegetation was downloaded: "),
-        "r_width = ",width_a,"| r_height = ", height_a, "| r_distance = ", distance_a)
+        "r_width = ",width_a,"| r_height = ", height_a, "| r_distance = ", distance_a, call. = F)
 }
 
