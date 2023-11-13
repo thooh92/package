@@ -60,7 +60,7 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
   monte_list    <- paste0("D",distance_a,"_W",width_a,"_H",height_a,suffices)
 
 
-  # Download from minio - don't touch following information
+  # Download from minio with following access key - DO NOT CHANGE!
   Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC',
              "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh',
              "AWS_DEFAULT_REGION" = 'test',
@@ -69,11 +69,13 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
 
   warning("Downloading approximately 4,000 kb", call. = F)
 
+  # If filepath was provided without trailing backslash, a trailing backslash is added
   if(substr(filepath, nchar(filepath), nchar(filepath)) != "/"){
     filepath = paste0(filepath, "/")
   }
 
 
+  # Storing 16 available vegetation states on local machine
   for(i in 1:16){
       save_object(bucket = 'met-ohnemus-miro',
               object = paste0("radiation_model/results_monte/",monte_list[i],".rdata"),
