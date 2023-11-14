@@ -83,8 +83,8 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
               use_https = T)
   }
 
-  warning(paste("The following geometry in fully developed vegetation was downloaded and stored in ",
-                filepath, "r_width = ",width_a,"| r_height = ", height_a, "| r_distance = ", distance_a,)
+  warning(paste("The following geometry in fully developed vegetation was downloaded and stored in",
+                filepath, "| r_width = ",width_a,"| r_height = ", height_a, "| r_distance = ", distance_a),
                 call. = F)
 }
 
