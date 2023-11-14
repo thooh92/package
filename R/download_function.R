@@ -19,14 +19,14 @@
 #'
 
 download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
-  if(require("devtools") == F){
-    install.packages("devtools")
-  }
-  library("devtools")
+#  if(require("devtools") == F){
+#    install.packages("devtools")
+#  }
+#  library("devtools")
 
-  if(require("minio.s3") == F){
-    install_github("thooh92/minio.s3", dependencies = T)
-  }
+#  if(require("minio.s3") == F){
+#    install_github("thooh92/minio.s3", dependencies = T)
+#  }
   library("minio.s3")
 
   # Define available geometries
