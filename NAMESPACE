@@ -2,3 +2,4 @@
 
 export(download_fun)
 export(processing_function)
+import(minio.s3)

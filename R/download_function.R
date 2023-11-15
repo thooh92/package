@@ -13,20 +13,13 @@
 #' @param filepath Enter path where downloaded files should be stored. Defaults to working directory.
 #'
 #' @return A list with all different vegetation state files for the associated geometry
+#' @import minio.s3
 #' @export
 #'
 #' @examples download_fun(r_width = 0.4, r_height = 1.1, r_distance = 0.8, filepath = "your/path/or/wd")
 #'
 
 download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
-#  if(require("devtools") == F){
-#    install.packages("devtools")
-#  }
-#  library("devtools")
-
-#  if(require("minio.s3") == F){
-#    install_github("thooh92/minio.s3", dependencies = T)
-#  }
   library("minio.s3")
 
   # Define available geometries
@@ -77,7 +70,7 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
 
   # Storing 16 available vegetation states on local machine
   for(i in 1:16){
-      save_object(bucket = 'met-ohnemus-miro',
+      minio.s3::save_object(bucket = 'met-ohnemus-miro',
               object = paste0("radiation_model/results_monte/",monte_list[i],".rdata"),
               file = paste0(filepath,monte_list[i],".rdata"),
               use_https = T)
