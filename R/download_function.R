@@ -20,7 +20,6 @@
 #'
 
 download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
-  library("minio.s3")
 
   # Define available geometries
   widths    <- c(0.35, 0.45, 0.55)
