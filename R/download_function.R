@@ -27,7 +27,7 @@ download_fun <- function(r_width, r_height, r_distance, filepath = getwd()){
   distances <- seq(1,3.5,0.25)
 
   # Choose closest geometry from available ones
-  width_a   <- widths[which.min(widths - r_width)]
+  width_a   <- widths[which.min(abs(widths - r_width))]
   height_a  <- heights[which.min(abs(heights - r_height))]
   distance_a<- distances[which.min(abs(distances - r_distance))]
 
