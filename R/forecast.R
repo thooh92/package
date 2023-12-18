@@ -2,8 +2,7 @@
 #'
 #' implements a 5-day forecast based on data from the German Weather Service (DWD)
 #' applicable for European locations. The forecast function allows download of forecast
-#' data and creates a table and two plots checking these data as outputs. It
-#' accesses the last_update() function which is also defined here.
+#' data and creates a table and two plots checking these data as outputs.
 #'
 #' @name forecast
 #' @param locations SpatVector or data.frame. Locations for which forecast information shall be extracted.
@@ -22,11 +21,23 @@
 #' @import curl
 #' @import stringr
 #' @import R.utils
+#'
+#' @examples
+#' # Using a point SpatVector
+#' locs    <- vect("C:/Docs/MIRO/GIS/Standorte/Standorte.shp")
+#' fc      <- forecast(locations = locs, download = T)
+#'
+#' # Using a data.frame
+#' x <- data.frame(
+#' lon = c(11:15),
+#' lat = c(51:55)
+#' )
+#' fc      <- forecast(locations = x, download = F)
+#'
 
 #' @rdname forecast
 #' @export
 forecast  <- function(locations, filepath = getwd(), download = T){
-  last_time <- last_update() # required for output plots
   pats    <- c("RELHUM_2M.tif", "T_2M.tif", "TMAX_2M.tif", "TMIN_2M.tif", "TOT_PREC.tif",
                "GLOBRAD.tif", "WINDSPEED_10M.tif") # patterns of forecast data
 
@@ -56,6 +67,13 @@ forecast  <- function(locations, filepath = getwd(), download = T){
   } else { # If data was downloaded before, names are assign for later data access
     obj <- pats
   }
+
+  # Assign information of model start
+  last_time <- minio.s3::save_object(bucket = 'met-ohnemus-miro',
+                           object = "dwd_forecast/time.rds",
+                           file = paste0(filepath,"time.rds"),
+                           use_https = T)
+  last_time <- readRDS(last_time)
 
   # Preparing value extraction
   hours   <- c(0:78, seq(81,120,3))  # hours for which forecast is available
@@ -164,35 +182,4 @@ forecast  <- function(locations, filepath = getwd(), download = T){
   ret_list <- list(fill, vars_p, forecast_p)
   return(ret_list)
 }
-
-#' @rdname forecast
-#' @export
-last_update <- function(){  # Defining time of last available datasets
-  hour <- as.numeric(format(Sys.time(), format = "%H"))
-  if(hour >= 12){  # Time data of 6 a.m. is stored on minio
-    day <- Sys.Date()
-  } else {
-    day <- Sys.Date() - 1
-  }
-  last_noon <- as.POSIXct(paste(day, 6), format = "%Y-%m-%d %H")
-  return(last_noon)
-}
-
-#'
-#' @examples
-#' # Using a point SpatVector
-#' locs    <- vect("C:/Docs/MIRO/GIS/Standorte/Standorte.shp")
-#' fc      <- forecast(locations = locs, download = T)
-#'
-#' # Using a data.frame
-#' x <- data.frame(
-#' lon = c(11:15),
-#' lat = c(51:55)
-#' )
-#' fc      <- forecast(locations = x, download = F)
-#'
-
-
-
-
 
