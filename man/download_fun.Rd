@@ -7,13 +7,13 @@
 download_fun(r_width, r_height, r_distance, filepath = getwd())
 }
 \arguments{
-\item{r_width}{Enter width of a vineyard or orchard row in m in fully developed vegetation}
+\item{r_width}{Numeric. Enter width of a vineyard or orchard row in m in fully developed vegetation}
 
-\item{r_height}{Enter height of a vineyard or orchard row in m in fully developed vegetation}
+\item{r_height}{Numeric. Enter height of a vineyard or orchard row in m in fully developed vegetation}
 
-\item{r_distance}{Enter distance between vineyard or orchard rows in m in fully developed vegetation}
+\item{r_distance}{Numeric. Enter distance between vineyard or orchard rows in m in fully developed vegetation}
 
-\item{filepath}{Enter path where downloaded files should be stored. Defaults to working directory.}
+\item{filepath}{Character. Enter path where downloaded files should be stored. Defaults to working directory.}
 }
 \value{
 A list with all different vegetation state files for the associated geometry

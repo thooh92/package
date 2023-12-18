@@ -7,10 +7,10 @@
 #' If other geometries are given to the function, the closest geometry is downloaded. If these geometries are far off the closest modelled geometry a
 #' a warning is created.
 #'
-#' @param r_width Enter width of a vineyard or orchard row in m in fully developed vegetation
-#' @param r_height Enter height of a vineyard or orchard row in m in fully developed vegetation
-#' @param r_distance Enter distance between vineyard or orchard rows in m in fully developed vegetation
-#' @param filepath Enter path where downloaded files should be stored. Defaults to working directory.
+#' @param r_width Numeric. Enter width of a vineyard or orchard row in m in fully developed vegetation
+#' @param r_height Numeric. Enter height of a vineyard or orchard row in m in fully developed vegetation
+#' @param r_distance Numeric. Enter distance between vineyard or orchard rows in m in fully developed vegetation
+#' @param filepath Character. Enter path where downloaded files should be stored. Defaults to working directory.
 #'
 #' @return A list with all different vegetation state files for the associated geometry
 #' @import minio.s3
