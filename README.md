@@ -1,15 +1,15 @@
-# package
+# EvAppleWine
 This package is used to estimate and predict evapotranspiration in vineyards and apple trees. The model is based on a radiation partitioning approach by 
-Hofmann et al. (2014). The package comes with a library of orchard or vineyard geometries.
+Hofmann et al. (2014). EvAppleWine comes with a library of orchard or vineyard geometries.
 At the moment this library only includes rows, as they are typical for vineyards and most widespread in commercial apple orchards.
 
-## Initializing Package
-This package is not (yet) available on CRAN. It can, however, be downloaded from github using the package devtools. Thus, for package initialization run this code
+## Initializing EvAppleWine
+EvAppleWine is not (yet) available on CRAN. It can, however, be downloaded from github using the package devtools. Thus, for EvAppleWine initialization run this code
 ```
 #install.packages("devtools")
 library(devtools)
-install_github("thooh92/package")
-library(package)
+install_github("thooh92/EvAppleWine")
+library(EvAppleWine)
 ```
 
 ## Download Orchard/Vineyard Geometry
