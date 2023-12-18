@@ -2,7 +2,6 @@
 
 export(download_fun)
 export(forecast)
-export(last_update)
 export(processing_function)
 import(R.utils)
 import(curl)

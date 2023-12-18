@@ -23,7 +23,7 @@
 #' @import R.utils
 #'
 #' @examples
-#' # Using a point SpatVector
+#' # Using a SpatVector
 #' locs    <- vect("C:/Docs/MIRO/GIS/Standorte/Standorte.shp")
 #' fc      <- forecast(locations = locs, download = T)
 #'
