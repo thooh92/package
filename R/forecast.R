@@ -5,6 +5,7 @@
 #' data and creates a table and two plots checking these data as outputs. It
 #' accesses the last_update() function which is also defined here.
 #'
+#' @name forecast
 #' @param locations SpatVector or data.frame. Locations for which forecast information shall be extracted.
 #' If data.frame geographic coordinates must be provided in columns named "lon", "lat".
 #' Optionally, the location names can be provided in a column "Name".
@@ -21,22 +22,9 @@
 #' @import curl
 #' @import stringr
 #' @import R.utils
+
+#' @rdname forecast
 #' @export
-#'
-#' @examples
-#' # Using a point SpatVector
-#' locs    <- vect("C:/Docs/MIRO/GIS/Standorte/Standorte.shp")
-#' fc      <- forecast(locations = locs, download = T)
-#'
-#' # Using a data.frame
-#' x <- data.frame(
-#' lon = c(11:15),
-#' lat = c(51:55)
-#' )
-#' fc      <- forecast(locations = x, download = F)
-#'
-
-
 forecast  <- function(locations, filepath = getwd(), download = T){
   last_time <- last_update() # required for output plots
   pats    <- c("RELHUM_2M.tif", "T_2M.tif", "TMAX_2M.tif", "TMIN_2M.tif", "TOT_PREC.tif",
@@ -177,7 +165,8 @@ forecast  <- function(locations, filepath = getwd(), download = T){
   return(ret_list)
 }
 
-
+#' @rdname forecast
+#' @export
 last_update <- function(){  # Defining time of last available datasets
   hour <- as.numeric(format(Sys.time(), format = "%H"))
   if(hour >= 12){  # Time data of 6 a.m. is stored on minio
@@ -188,3 +177,22 @@ last_update <- function(){  # Defining time of last available datasets
   last_noon <- as.POSIXct(paste(day, 6), format = "%Y-%m-%d %H")
   return(last_noon)
 }
+
+#'
+#' @examples
+#' # Using a point SpatVector
+#' locs    <- vect("C:/Docs/MIRO/GIS/Standorte/Standorte.shp")
+#' fc      <- forecast(locations = locs, download = T)
+#'
+#' # Using a data.frame
+#' x <- data.frame(
+#' lon = c(11:15),
+#' lat = c(51:55)
+#' )
+#' fc      <- forecast(locations = x, download = F)
+#'
+
+
+
+
+

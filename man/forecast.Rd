@@ -2,9 +2,12 @@
 % Please edit documentation in R/forecast.R
 \name{forecast}
 \alias{forecast}
+\alias{last_update}
 \title{forecast}
 \usage{
 forecast(locations, filepath = getwd(), download = T)
+
+last_update()
 }
 \arguments{
 \item{locations}{SpatVector or data.frame. Locations for which forecast information shall be extracted.
@@ -26,17 +29,4 @@ implements a 5-day forecast based on data from the German Weather Service (DWD)
 applicable for European locations. The forecast function allows download of forecast
 data and creates a table and two plots checking these data as outputs. It
 accesses the last_update() function which is also defined here.
-}
-\examples{
-# Using a point SpatVector
-locs    <- vect("C:/Docs/MIRO/GIS/Standorte/Standorte.shp")
-fc      <- forecast(locations = locs, download = T)
-
-# Using a data.frame
-x <- data.frame(
-lon = c(11:15),
-lat = c(51:55)
-)
-fc      <- forecast(locations = x, download = F)
-
 }
