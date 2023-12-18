@@ -9,7 +9,13 @@ Description: Model partitions radiation in apple orchards and vineyards. It can
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Imports: 
-    minio.s3
+    minio.s3,
+    tidyverse,
+    terra,
+    scales,
+    curl,
+    stringr,
+    R.utils
 Remotes:
     thooh92/minio.s3
 Encoding: UTF-8
