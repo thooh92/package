@@ -10,4 +10,4 @@
 - Zwischenziel 1: Funktion, die die ET-Aufteilung in Kompartimente geteilt ausgibt (ET-Funktion)
 - Zwischenziel 2: Funktion, die das Radiation Partitioning ausgibt (RadPart-Funktion)
 - Zwischenziel 3: Modell via Package laufen lassen
-- Zwischenziel 4: Forecast implementieren
+- Zwischenziel 4: Forecast-Schnittstelle implementieren
