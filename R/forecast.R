@@ -43,8 +43,8 @@ forecast  <- function(locations, filepath = getwd(), download = T){
 
   if(download == T){
     # Minio Access Key
-    Sys.setenv("AWS_ACCESS_KEY_ID" = 'h5OlQlKs05NICoKjrWhC',
-               "AWS_SECRET_ACCESS_KEY" = '6dwoCb9XKhH0QE4RX5Gj63HnsYXUewv5tHp0jaVh',
+    Sys.setenv("AWS_ACCESS_KEY_ID" = 'DWD-public',
+               "AWS_SECRET_ACCESS_KEY" = 'YguULm2FqW1mn7HuXozV1YUYDeJwxJxp4aWOvr5L',
                "AWS_DEFAULT_REGION" = 'test',
                "AWS_S3_ENDPOINT" = 'minio.ufz.de:443')
 
