@@ -150,6 +150,8 @@ forecast  <- function(locations, filepath = getwd(), download = T){
                                                ifelse(fill$variable == "TOT_PREC", "Precipitation [mm]",
                                                       ifelse(fill$variable == "GLOBRAD", "Global Radiation [W/m²]", "Wind Speed [m/s]"))))))
 
+  # Sometimes negative P exists, thus: set 0!
+  fill$value[fill$variable == "Precipitation [mm]"] <- 0
 
 
   # Plotting all variables as visual check
