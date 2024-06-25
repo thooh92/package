@@ -107,8 +107,8 @@ forecast  <- function(locations, filepath = getwd(), download = T){
 
       if(i == 6){ # Correcting Radiation Data from average to hourly value
         for(j in 2:length(sub_df$value)){
-          empty_v[j] <- (sub_df$value[j] * sub_df$hours[j]) -
-            (sub_df$value[j-1] * sub_df$hours[j-1])
+          empty_v[j] <- (sub_df$value[j] * as.numeric(sub_df$hours[j])) -
+            (sub_df$value[j-1] * as.numeric(sub_df$hours[j-1]))
         }
         sub_df$value[2:length(sub_df$value)] <- empty_v[2:length(sub_df$value)]
       }
