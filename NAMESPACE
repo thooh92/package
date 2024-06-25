@@ -2,6 +2,7 @@
 
 export(download_fun)
 export(forecast)
+export(porosity_ext)
 export(processing_function)
 import(R.utils)
 import(curl)

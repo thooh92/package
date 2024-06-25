@@ -12,6 +12,7 @@
 #' 'green' and 'red'. The mode refers to the color channel used for classification.
 #' @param resultpath Character. Enter path where downloaded files should be stored.
 #'
+#' @export
 
 porosity_ext <- function(picture, mode = "excess_blue", resultpath){
   cat("Please wait, analyzing picure \n")
@@ -61,7 +62,7 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath){
     # plot density & identify threshold position
     plot(d_kanal)
     d_rank <- identify(d_kanal)
-    cat(paste("\n", "The",d_rank,"th value in the density distribiution is chosen as threshold for classification \n"))
+    cat(paste("\n", "The",d_rank,"th value in the density distribution is chosen as threshold for classification \n"))
     dev.off() # closes the plot
 
     # identify threshold value
