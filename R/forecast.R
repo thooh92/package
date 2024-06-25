@@ -98,13 +98,20 @@ forecast  <- function(locations, filepath = getwd(), download = T){
     for(k in 1:length(unique(ext_df$ID))){
       sub_df   <- ext_df[ext_df$ID == k,]
 
-      if(i == 5){
+      if(i == 5){ # Correcting Precipitation Data from sum to hourly value
         for(j in 2:length(sub_df$value)){
           empty_v[j] <- sub_df$value[j] - sub_df$value[j-1]
         }
         sub_df$value[2:length(sub_df$value)] <- empty_v[2:length(sub_df$value)]
       }
 
+      if(i == 6){ # Correcting Radiation Data from average to hourly value
+        for(j in 2:length(sub_df$value)){
+          empty_v[j] <- (sub_df$value[j] * sub_df$hours[j]) -
+            (sub_df$value[j-1] * sub_df$hours[j-1])
+        }
+        sub_df$value[2:length(sub_df$value)] <- empty_v[2:length(sub_df$value)]
+      }
       # Interpolation of data to hourly intervals; DWD data from 78 h in the future
       # onwards provided in 3 h intervals
       interpol <- data.frame(approx(as.numeric(sub_df$hours), sub_df$value, xout = h,
