@@ -47,7 +47,7 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath){
     kanal <- rn
 
   } else if (mode == "excess_blue"){
-    d_kanal <- density(e_blau)
+    d_kanal <- density(e_blau[!is.na(e_blau)])
     kanal <- e_blau
 
   } else stop("mode has to be 'blue', 'green', 'red' or 'excess_blue")
@@ -72,6 +72,7 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath){
     # Produces vector with T and F indicating value above or below threshold
     if (mode == "blue" | mode == "excess_blue"){
       logi <- kanal < grenze        # value < threshold = F
+      logi[is.na(logi)] <- 0
     } else logi <- kanal >= grenze  # value >= threshold = T
 
     # New array, if logi = F, value becomes 0, logi = T values kept
