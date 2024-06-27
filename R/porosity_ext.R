@@ -14,7 +14,7 @@
 #'
 #' @export
 
-porosity_ext <- function(picture, mode = "excess_blue", resultpath){
+porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename){
   cat("Please wait, analyzing picure \n")
 
   # read rgb channels as vector
@@ -76,12 +76,12 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath){
     } else logi <- kanal >= grenze  # value >= threshold = T
 
     # New array, if logi = F, value becomes 0, logi = T values kept
-    bild <- array(data = c(rot*logi, gruen *logi, blau * logi), dim = dim(bild) )
+    bild <- array(data = c(rot*logi, gruen *logi, blau * logi), dim = dim(picture) )
     bild.raster <- as.raster(bild)
     plot(bild.raster)   # plot Raster to interactive console
 
     # Save classified picture
-    writeJPEG(target = paste0(resultpath,bildnamen[i],"_",mode,".jpg"), bild)
+    writeJPEG(target = paste0(resultpath,filename,"_",mode,".jpg"), bild)
 
     cat("\n", "Control Quality of Classification \n")
     cat("\n", "Enter 'repeat' to repeat analysis or 'accept' if result is fine \n")
