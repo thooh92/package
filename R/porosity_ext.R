@@ -29,31 +29,31 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
   blue  <- as.vector(picture[,,3])
 
   # Sum of individual colour values
-  light <- (red + green + blue)
+  bright <- (red + green + blue)
 
   # Share of each colour
-  rn <- red / light
-  gn <- green / light
-  bn <- blue / light
+  rn <- red / bright
+  gn <- green / bright
+  bn <- blue / bright
 
   # calculation excess blue value
   e_blue <- (2*bn - (rn+gn))
 
   # Grabbing density based on chosen mode
   if (mode == "blue"){
-    d_kanal <- density(bn)
+    d_channel <- density(bn)
     channel <- bn
 
   } else if (mode == "green"){
-    d_kanal <- density(gn)
+    d_channel <- density(gn)
     channel <- gn
 
   } else if (mode == "red"){
-    d_kanal <- density(rn)
+    d_channel <- density(rn)
     channel <- rn
 
   } else if (mode == "excess_blue"){
-    d_kanal <- density(e_blue[!is.na(e_blue)])
+    d_channel <- density(e_blue[!is.na(e_blue)])
     channel <- e_blue
 
   } else stop("mode has to be 'blue', 'green', 'red' or 'excess_blue")
@@ -69,27 +69,27 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
     } else logi <- channel >= threshold  # value >= threshold = T
 
     # New array, if logi = F, value becomes 0, logi = T values kept
-    bild <- array(data = c(red*logi, green *logi, blue * logi), dim = dim(picture) )
-    bild.raster <- as.raster(bild)
-    plot(bild.raster)   # plot Raster to interactive console
+    pic <- array(data = c(red*logi, green *logi, blue * logi), dim = dim(picture) )
+    pic.raster <- as.raster(pic)
+    plot(pic.raster)   # plot Raster to interactive console
   }
 
   if(classification == "manual"){
-    eingabe <- "repeat"
-    while(eingabe == "repeat"){  # While loop to allow for correction of classification
+    input <- "repeat"
+    while(input == "repeat"){  # While loop to allow for correction of classification
       cat("Graphics: Device is created or updated \n")
       cat("\n", "Please choose threshold in plot \n")
       cat("\n", "1. Left click on threshold position \n")
       cat("\n", "2. If satisfied, press esc, click finish in plot panel or insert threshold value in Console  \n")
 
       # plot density & identify threshold position
-      plot(d_kanal)
-      d_rank <- identify(d_kanal)
+      plot(d_channel)
+      d_rank <- identify(d_channel)
       cat(paste("\n", "The",d_rank,"th value in the density distribution is chosen as threshold for classification \n"))
       dev.off() # closes the plot
 
       # identify threshold value
-      threshold <- d_kanal$x[d_rank]
+      threshold <- d_channel$x[d_rank]
       cat("Threshold value: ", threshold)
 
       # Produces vector with T and F indicating value above or below threshold
@@ -99,16 +99,16 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
       } else logi <- channel >= threshold  # value >= threshold = T
 
       # New array, if logi = F, value becomes 0, logi = T values kept
-      bild <- array(data = c(red*logi, green *logi, blue * logi), dim = dim(picture) )
-      bild.raster <- as.raster(bild)
-      plot(bild.raster)   # plot Raster to interactive console
+      pic <- array(data = c(red*logi, green *logi, blue * logi), dim = dim(picture) )
+      pic.raster <- as.raster(pic)
+      plot(pic.raster)   # plot Raster to interactive console
 
       cat("\n", "Control Quality of Classification \n")
       cat("\n", "Enter 'repeat' to repeat analysis or 'accept' if result is fine \n")
 
       # Create output of insertion ("Enter" or "ja")
-      eingabe <- scan(n=1, what = character())
-      cat(eingabe, " was chosen \n")
+      input <- scan(n=1, what = character())
+      cat(input, " was chosen \n")
     }
   }
 
@@ -118,23 +118,23 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
                          paste0(resultpath, "/"))
 
     # Save classified picture
-    writeJPEG(target = paste0(resultpath,filename,"_",mode,".jpg"), bild)
+    writeJPEG(target = paste0(resultpath,filename,"_",mode,".jpg"), pic)
 
   # Calculating Porosity by subtracting amount of cells with T from all cells
   poro <- (length(logi) - sum(logi)) / length(logi)
   cat("Porosity: ", poro, "\n")
 
   # Extract measurement values for output list
-  count_blue <- sum(logi)
+  count_true <- sum(logi)
   count_pixel <- length(logi)
 
   # Create output list
-  list(poro = poro, count_pixel = count_pixel, count_blue = count_blue, threshold = threshold)
+  list(poro = poro, count_pixel = count_pixel, count_true = count_true, threshold = threshold)
 }
 
 
 otsu_threshold <- function(channel){
-  histogram <- hist(channel, breaks = 300)
+  histogram <- hist(channel, breaks = 500)
 
   # extracting counts and edges of each histogram bin
   counts <- histogram$counts # frequency of each element / n_i
