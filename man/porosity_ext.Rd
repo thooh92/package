@@ -4,15 +4,26 @@
 \alias{porosity_ext}
 \title{Porosity Extraction}
 \usage{
-porosity_ext(picture, mode = "excess_blue", resultpath)
+porosity_ext(
+  picture,
+  mode = "excess_blue",
+  resultpath,
+  filename,
+  classification = "Otsu"
+)
 }
 \arguments{
-\item{picture}{RGB picture.}
+\item{picture}{A character vector with the file path of the RGB picture to process.}
 
 \item{mode}{character. Mode used for classification. Default is 'excess_blue', other options are 'blue',
 'green' and 'red'. The mode refers to the color channel used for classification.}
 
 \item{resultpath}{Character. Enter path where downloaded files should be stored.}
+
+\item{filename}{Character. Enter name that the saved file should get.}
+
+\item{classification}{Character. Defaults to the Otsu method. Other option is "manual",
+then the threshold to classify the picture has to be set manually by clicking on the density plot.}
 }
 \value{
 A list consisting of the porosity (0-1), the number of pixels, the number
@@ -20,6 +31,8 @@ of pixels classified as non-green and the threshold value for this classificatio
 }
 \description{
 extracts the porosity of green vegetation regarding light interception.
-Based on Sonnentag et al. (2012) - 10.1016/j.agrformet.2011.09.009 a
-classification is run separating "plant" and "background".
+Based on Sonnentag et al. (2012, 10.1016/j.agrformet.2011.09.009) a
+classification is run separating "plant" and "background". On this account,
+the threshold procedure introduced by Otsu (1979, https://doi.org/10.1109/TSMC.1979.4310076)
+was implemented.
 }
