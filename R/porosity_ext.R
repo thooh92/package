@@ -7,7 +7,7 @@
 #' @return A list consisting of the porosity (0-1), the number of pixels, the number
 #' of pixels classified as non-green and the threshold value for this classification
 #'
-#' @param picture RGB picture.
+#' @param picture A character vector with the file path of the RGB picture to process.
 #' @param mode character. Mode used for classification. Default is 'excess_blue', other options are 'blue',
 #' 'green' and 'red'. The mode refers to the color channel used for classification.
 #' @param resultpath Character. Enter path where downloaded files should be stored.
@@ -79,6 +79,12 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename){
     bild <- array(data = c(rot*logi, gruen *logi, blau * logi), dim = dim(picture) )
     bild.raster <- as.raster(bild)
     plot(bild.raster)   # plot Raster to interactive console
+
+
+    # Add trailing slash to resultpath if none exists yet
+    resultpath <- ifelse(substr(resultpath, nchar(resultpath),
+                                nchar(resultpath)) == "/", resultpath,
+                         paste0(resultpath, "/"))
 
     # Save classified picture
     writeJPEG(target = paste0(resultpath,filename,"_",mode,".jpg"), bild)
