@@ -10,18 +10,18 @@
 #' @return A list consisting of the porosity (0-1), the number of pixels, the number
 #' of pixels classified as non-green and the threshold value for this classification
 #'
-#' @param picture A character vector with the file path of the RGB picture to process.
+#' @param picture A character vector with the file path of the RGB image to process.
 #' @param mode character. Mode used for classification. Default is 'excess_blue', other options are 'blue',
 #' 'green' and 'red'. The mode refers to the color channel used for classification.
 #' @param resultpath Character. Enter path where downloaded files should be stored.
 #' @param filename Character. Enter name that the saved file should get.
 #' @param classification Character. Defaults to the Otsu method. Other option is "manual",
-#' then the threshold to classify the picture has to be set manually by clicking on the density plot.
+#' then the threshold to classify the image has to be set manually by clicking on the density plot.
 #'
 #' @export
 
 porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, classification = "Otsu"){
-  cat("Please wait, analyzing picure \n")
+  cat("Please wait, analyzing image \n")
 
   # read rgb channels as vector
   red   <- as.vector(picture[,,1])
@@ -122,7 +122,7 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
 
   # Calculating Porosity by subtracting amount of cells with T from all cells
   poro <- (length(logi) - sum(logi)) / length(logi)
-  cat("Porosity: ", poro, "\n")
+  cat("\n Porosity: ", poro, "\n")
 
   # Extract measurement values for output list
   count_true <- sum(logi)
