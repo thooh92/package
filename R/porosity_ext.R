@@ -15,12 +15,16 @@
 #' 'green' and 'red'. The mode refers to the color channel used for classification.
 #' @param resultpath Character. Enter path where downloaded files should be stored.
 #' @param filename Character. Enter name that the saved file should get.
-#' @param classification Character. Defaults to the Otsu method. Other option is "manual",
-#' then the threshold to classify the image has to be set manually by clicking on the density plot.
+#' @param classification Character. Defaults to the Otsu method. Other options are "click_threshold",
+#' then the threshold to classify the image has to be set manually by clicking on the density plot, and
+#' "set_threshold" where a numeric threshold is typed in as argument and used for classification. The latter
+#' is particularly useful when an Otsu classification did not directly deliver perfect results, thus the Otsu
+#' threshold can be adjusted. For set_threshold, the threshold value must be supplied in the function body.
 #'
 #' @export
 
-porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, classification = "Otsu"){
+porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, classification = "Otsu",
+                         threshold = NA){
   cat("Please wait, analyzing image \n")
 
   # read rgb channels as vector
@@ -74,7 +78,23 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
     plot(pic.raster)   # plot Raster to interactive console
   }
 
-  if(classification == "manual"){
+  if(classification == "set_threshold"){
+    threshold <- threshold
+    cat("Threshold value: ", threshold)
+
+    # Produces vector with T and F indicating value above or below threshold
+    if (mode == "blue" | mode == "excess_blue"){
+      logi <- channel < threshold        # value < threshold = F
+      logi[is.na(logi)] <- 0
+    } else logi <- channel >= threshold  # value >= threshold = T
+
+    # New array, if logi = F, value becomes 0, logi = T values kept
+    pic <- array(data = c(red*logi, green *logi, blue * logi), dim = dim(picture) )
+    pic.raster <- as.raster(pic)
+    plot(pic.raster)   # plot Raster to interactive console
+  }
+
+  if(classification == "click_threshold"){
     input <- "repeat"
     while(input == "repeat"){  # While loop to allow for correction of classification
       cat("Graphics: Device is created or updated \n")

@@ -9,11 +9,12 @@ porosity_ext(
   mode = "excess_blue",
   resultpath,
   filename,
-  classification = "Otsu"
+  classification = "Otsu",
+  threshold = NA
 )
 }
 \arguments{
-\item{picture}{A character vector with the file path of the RGB picture to process.}
+\item{picture}{A character vector with the file path of the RGB image to process.}
 
 \item{mode}{character. Mode used for classification. Default is 'excess_blue', other options are 'blue',
 'green' and 'red'. The mode refers to the color channel used for classification.}
@@ -22,8 +23,11 @@ porosity_ext(
 
 \item{filename}{Character. Enter name that the saved file should get.}
 
-\item{classification}{Character. Defaults to the Otsu method. Other option is "manual",
-then the threshold to classify the picture has to be set manually by clicking on the density plot.}
+\item{classification}{Character. Defaults to the Otsu method. Other options are "click_threshold",
+then the threshold to classify the image has to be set manually by clicking on the density plot, and
+"set_threshold" where a numeric threshold is typed in as argument and used for classification. The latter
+is particularly useful when an Otsu classification did not directly deliver perfect results, thus the Otsu
+threshold can be adjusted. For set_threshold, the threshold value must be supplied in the function body.}
 }
 \value{
 A list consisting of the porosity (0-1), the number of pixels, the number
