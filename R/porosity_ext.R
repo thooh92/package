@@ -40,8 +40,6 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
   gn <- green / bright
   bn <- blue / bright
 
-  # calculation excess blue value
-  e_blue <- (2*bn - (rn+gn))
 
   # Grabbing density based on chosen mode
   if (mode == "blue"){
@@ -57,6 +55,9 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
     channel <- rn
 
   } else if (mode == "excess_blue"){
+    # calculation excess blue value
+    e_blue <- (2*bn - (rn+gn))
+
     d_channel <- density(e_blue[!is.na(e_blue)])
     channel <- e_blue
 
@@ -100,7 +101,7 @@ porosity_ext <- function(picture, mode = "excess_blue", resultpath, filename, cl
       cat("Graphics: Device is created or updated \n")
       cat("\n", "Please choose threshold in plot \n")
       cat("\n", "1. Left click on threshold position \n")
-      cat("\n", "2. If satisfied, press esc, click finish in plot panel or insert threshold value in Console  \n")
+      cat("\n", "2. If satisfied, press esc or click finish in plot panel \n")
 
       # plot density & identify threshold position
       plot(d_channel)
@@ -160,7 +161,6 @@ otsu_threshold <- function(channel){
   counts <- histogram$counts # frequency of each element / n_i
   edges <- histogram$breaks # width of each bar
 
-  #dev.off() #??
 
   # calculating bin centers
   bin_centers <- edges[-length(edges)] + diff(edges) / 2
